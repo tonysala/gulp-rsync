@@ -109,9 +109,11 @@ module.exports = function(options) {
     };
 
     if (typeof options.args === 'object') {
-        Object(options.args).forEach(function(key) {
-            options[key] = options.args[key];
-        });
+        for (var arg in options.args) {
+            if (options.args.hasOwnProperty(arg)) {
+                options[arg] = options.args[arg];
+            }
+        }
     }
 
     if (options.clean) {

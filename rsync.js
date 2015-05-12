@@ -4,6 +4,7 @@ var assert = require('better-assert');
 var every = require('lodash.every');
 var isString = require('lodash.isstring');
 var spawn = require('child_process').spawn;
+var gutil = require('gulp-util');
 
 function rsync(config) {
   if (!(this instanceof rsync)) {
@@ -107,7 +108,7 @@ rsync.prototype = {
     childProcess.on('close', function(code) {
       var error = null;
       if (code !== 0) {
-        error = new Error('rsync exited with code ' + code);
+        gutil.log('rsync exited with code ' + code);
       }
 
       if (typeof callback === 'function') {
